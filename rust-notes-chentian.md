@@ -38,7 +38,7 @@
 
 ## 3 编写第一个Rust程序
 
-## 4 get hands dirty,CLI 小工具
+## 4 CLI 小工具
 
 ```
 anyhow ="1" 错误处理
