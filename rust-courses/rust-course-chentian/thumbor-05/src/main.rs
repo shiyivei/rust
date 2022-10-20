@@ -17,6 +17,7 @@ mod pb;
 use anyhow::Result;
 use bytes::Bytes;
 use lru::LruCache;
+use std::num::NonZeroUsize;
 use tokio::sync::Mutex;
 use tower::ServiceBuilder;
 use tracing::{info, instrument};
@@ -37,7 +38,7 @@ async fn main() {
     // 初始化tracing
     tracing_subscriber::fmt::init();
 
-    let cache: Cache = Arc::new(Mutex::new(LruCache::new(1024)));
+    let cache: Cache = Arc::new(Mutex::new(LruCache::new(NonZeroUsize::new(1024).unwrap())));
 
     //构建路由
     let app = Router::new()
@@ -68,7 +69,7 @@ async fn generate(
     Extension(cache): Extension<Cache>,
 ) -> Result<(HeaderMap, Vec<u8>), StatusCode> {
     let url = percent_decode_str(&url).decode_utf8_lossy();
-    let spec: ImageSpec = spec
+    let _spec: ImageSpec = spec
         .as_str()
         .try_into()
         .map_err(|_| StatusCode::BAD_REQUEST)?;
