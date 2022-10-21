@@ -55,7 +55,7 @@ async fn main() {
     //运行web服务器
     let addr = "127.0.0.1:3000".parse().unwrap();
 
-    print_test_url("https://imgaes.pexels.com/photos/1562477/pexels/-photo-1562477");
+    print_test_url("https://images.pexels.com/photos/1562477/pexels-photo-1562477.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
 
     info!("listening on {}", addr);
 
